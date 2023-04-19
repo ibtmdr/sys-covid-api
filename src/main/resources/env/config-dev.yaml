@@ -1,0 +1,22 @@
+# Déclaration des properties par env
+# pour nous permet de suitcher entre les environnements 
+
+# listener http
+http:
+  port: "8081"
+  protocol: "http"
+  host: "localhost"
+  path: "/api/*"
+
+
+# request http pour appler le backend covidTraking API 
+covidtraking:
+  port: "443"
+  protocol: "HTTPS"
+  host: "api.covidtracking.com"
+  basepath: "/v1"
+  operations:
+    daily: "/us/daily.json"     # resource backend pour récupérer les statistiques 
+    state: "/states/{state}/current.json"  # resource backend pour récupérer le nombre des cas positifs courant
+    statedate: "/states/{state}/{date}.json"  # resource  backend pour récupérer le nombre des cas positifs par date précis
+  

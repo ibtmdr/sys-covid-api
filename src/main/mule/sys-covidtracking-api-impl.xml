@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+	<flow name="get:\covidTracking\all:sys-covidtracking-api-config">
+		<http:request method="GET" doc:name="Request" doc:id="5eb3ba1b-44f7-40a3-bf89-e1eda40b7d20" config-ref="HTTP_Request_configuration" path="${covidtraking.operations.daily}"/>
+		<logger level="INFO" doc:name="payload" doc:id="ae9dee85-59a7-44f7-9c3c-f643ad4af926" message="#[payload]"/>
+    </flow>
+    <flow name="get:\covidTracking\getdata\(state):sys-covidtracking-api-config">
+		<http:request method="GET" doc:name="Request" doc:id="b9ece3d6-2993-4658-9cb4-ca813a508121" config-ref="HTTP_Request_configuration" path="${covidtraking.operations.state}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"state" : attributes.uriParams.state
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="payload" doc:id="65528f52-bdac-43c1-94d7-ffa2e6a00e13" message="#[payload]"/>
+    </flow>
+    <flow name="get:\covidTracking\getdata\(state)\(date):sys-covidtracking-api-config">
+		<http:request method="GET" doc:name="Request" doc:id="c4a0309b-b08c-4d28-b7aa-9905ba8d9fa4" config-ref="HTTP_Request_configuration" path="${covidtraking.operations.statedate}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"state" : attributes.uriParams.state,
+	"date" : attributes.uriParams.date
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="payload" doc:id="82287e66-9fcb-47ce-a598-26cba27791e7" message="#[payload]"/>
+    </flow>
+</mule>

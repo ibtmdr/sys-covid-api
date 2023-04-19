@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: sys-covidtracking-api
+
+
+uses:
+  rt: library/ressourceTypes.raml
+ 
+traits:
+  client-id-secret-required: !include exchange_modules/9f51add0-4db7-4281-ba02-a07dc471768f/client-id-enforcement/1.0.0/client-id-enforcement.raml
+
+/covidTracking:
+  /all:
+    is: [client-id-secret-required]
+    type:
+      rt.get:
+        exampleReponse1: !include examples/covid-trackings-example.raml
+
+  /getdata/{state}:
+    is: [client-id-secret-required]
+    type:
+      rt.get:
+        exampleReponse1: !include examples/state-data-example.raml
+  
+  /getdata/{state}/{date}:
+    is: [client-id-secret-required]
+    type:
+      rt.get:
+        exampleReponse1: !include examples/state-data-example.raml
+
+

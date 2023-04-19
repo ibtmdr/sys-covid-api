@@ -1,0 +1,16 @@
+http:
+  port: "8081"
+  protocol: "http"
+  host: "localhost"
+  path: "/api/*"
+  
+covidtraking:
+  port: "443"
+  protocol: "HTTPS"
+  host: "api.covidtracking.com"
+  basepath: "/v1"
+  operations:
+    daily: "/us/daily.json"
+    state: "/states/{state}/current.json"
+    statedate: "/states/{state}/{date}.json"
+  

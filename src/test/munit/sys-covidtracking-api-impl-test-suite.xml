@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="sys-covidtracking-api-impl-test-suite.xml" />
+	<munit:test name="sys-covidtracking-api-impl-test-suite-get:\covidTracking\all:sys-covidtracking-api-configTest" doc:id="45255f2f-a6d7-4481-96ac-753910558b06" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock covidTraking" doc:id="da7d1fa7-ca17-464e-84a4-31e37a81df41" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Request" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="5eb3ba1b-44f7-40a3-bf89-e1eda40b7d20" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[output application/json --- readUrl("classpath://covid/all.json", "application/json")]' mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\covidTracking\all:sys-covidtracking-api-config" doc:id="58e80986-0e63-4028-8df2-e22964dd8dd9" name="get:\covidTracking\all:sys-covidtracking-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="b7d54b0c-99d0-4929-90d6-b26603608197" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="payload" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="ae9dee85-59a7-44f7-9c3c-f643ad4af926" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sys-covidtracking-api-impl-test-suite-get:\covidTracking\getdata\(state):sys-covidtracking-api-configTest" doc:id="56f77e94-9d8c-4985-8a5e-5456519e4ad1" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock covidTraking by state" doc:id="c1346de5-dc01-41a6-92a1-338186c83077" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Request" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="b9ece3d6-2993-4658-9cb4-ca813a508121" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[output application/json --- readUrl("classpath://covid/state.json", "application/json")]' mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Event" doc:id="41e0ca05-0bde-4b7d-8545-fdb64ba24977" >
+				<munit:attributes value='#[ output application/json --- {"uriParams": { "state" : "ca"}} ]' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\covidTracking\getdata\(state):sys-covidtracking-api-config" doc:id="b3e5a5e8-c902-4193-aba5-8f27efe5243c" name="get:\covidTracking\getdata\(state):sys-covidtracking-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="cbb1745d-ff85-4a0d-9b91-cd065d556127" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="payload" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="65528f52-bdac-43c1-94d7-ffa2e6a00e13" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sys-covidtracking-api-impl-test-suite-get:\covidTracking\getdata\(state)\(date):sys-covidtracking-api-configTest" doc:id="7fa7879b-165c-44f6-aa4c-62ef07350f72" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock covidTraking by date-state" doc:id="239245d1-9e08-484e-83ce-06d761098ea4" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Request" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c4a0309b-b08c-4d28-b7aa-9905ba8d9fa4" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[output application/json --- readUrl("classpath://covid/state.json", "application/json")]' />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Event" doc:id="e8b87d86-5419-4917-8675-05f4927c5100" >
+				<munit:attributes value='#[  output application/json&#10;  ---&#10;   {"uriParams":&#10;    {"date" : "20200101",&#10;    "state" : "ca"}&#10;    }  ]' encoding="UTF-8" mediaType="application/json" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\covidTracking\getdata\(state)\(date):sys-covidtracking-api-config" doc:id="7f4a3cf0-ec9c-49b1-becf-0b96e1d8baa9" name="get:\covidTracking\getdata\(state)\(date):sys-covidtracking-api-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="176e99da-46fa-44ae-a7a2-3e9c408d4f7d" processor="logger">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="payload" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="82287e66-9fcb-47ce-a598-26cba27791e7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
