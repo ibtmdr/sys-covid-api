@@ -1,6 +1,6 @@
 {
 	"env": {
-		"MULE_VERSION": "4.4.0-20230111",
+		"MULE_VERSION": "4.4.0-20220824",
 		"BG": "Cap4",
 		"BGID": "6a860bc2-7c16-4fc4-8c42-9a362133e5f9",
 		"WORKERS": "1",
