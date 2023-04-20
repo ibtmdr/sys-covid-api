@@ -16,13 +16,13 @@ pipeline {
     }
    stage('Build') {
       steps {
-          sh "mvn -e -X clean -DskipTests install"
+          sh "mvn -e -X clean install"
       }
     }
 
     stage('Deploiment CloudHub') { 
       steps {
-          sh "mvn -e -X deploy  -DskipTests  -DmuleDeploy -Dmule.version=${config.env.MULE_VERSION} -Danypoint.username=${DEPLOY_CREDS_USR} -Danypoint.password=${DEPLOY_CREDS_PSW} -Dcloudhub.app=${config.env.APP_NAME}-${config.env.ENVIRONMENT.toLowerCase()} -Dcloudhub.environment=${config.env.ENVIRONMENT} -Dcloudhub.bg=${config.env.BG} -Dcloudhub.bgid=${config.env.BGID}  -Dcloudhub.worker=${config.env.WORKERS} -Dcloudhub.workersize=${config.env.WORKERSIZE} -Dcloudhub.region=${config.env.REGION}"
+          sh "mvn -e -X deploy  -DmuleDeploy -Dmule.version=${config.env.MULE_VERSION} -Danypoint.username=${DEPLOY_CREDS_USR} -Danypoint.password=${DEPLOY_CREDS_PSW} -Dcloudhub.app=${config.env.APP_NAME}-${config.env.ENVIRONMENT.toLowerCase()} -Dcloudhub.environment=${config.env.ENVIRONMENT} -Dcloudhub.bg=${config.env.BG} -Dcloudhub.bgid=${config.env.BGID}  -Dcloudhub.worker=${config.env.WORKERS} -Dcloudhub.workersize=${config.env.WORKERSIZE} -Dcloudhub.region=${config.env.REGION}"
       }
     }
    }
