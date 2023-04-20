@@ -9,25 +9,20 @@ pipeline {
   stages {
    stage('config') {
       steps {
-         echo "branch = ${env.BRANCH_NAME}"
          script {
-            config = readJSON file: "env/${env.BRANCH_NAME}/config.json"
-            env = config.get("env")
+            config = readJSON file: 'env/${env.BRANCH_NAME}/config.json'
          }
-         echo " config = ${config}"
-         echo " env = ${env}"
       }
     }
    stage('Build') {
       steps {
-          sh "mvn clean install"
+          sh "mvn clean package"
       }
     }
 
     stage('Deploiment CloudHub') { 
-    
       steps {
-          sh "mvn -e -X deploy -DmuleDeploy -Dmule.version=${env.MULE_VERSION} -Danypoint.username=${DEPLOY_CREDS_USR} -Danypoint.password=${DEPLOY_CREDS_PSW} -Dcloudhub.app=${env.APP_NAME}-${env.ENVIRONMENT.toLowerCase()} -Dcloudhub.environment=${env.ENVIRONMENT} -Dcloudhub.bg=${env.BG} -Dcloudhub.bgid=${env.BGID}  -Dcloudhub.worker=${env.WORKERS} -Dcloudhub.workersize=${env.WORKERSIZE} -Dcloudhub.region=${env.REGION}"
+          sh "mvn -e -X deploy -DmuleDeploy -Dmule.version=${config.env.MULE_VERSION} -Danypoint.username=${DEPLOY_CREDS_USR} -Danypoint.password=${DEPLOY_CREDS_PSW} -Dcloudhub.app=${config.env.APP_NAME}-${config.env.ENVIRONMENT.toLowerCase()} -Dcloudhub.environment=${config.env.ENVIRONMENT} -Dcloudhub.bg=${config.env.BG} -Dcloudhub.bgid=${config.env.BGID}  -Dcloudhub.worker=${config.env.WORKERS} -Dcloudhub.workersize=${config.env.WORKERSIZE} -Dcloudhub.region=${config.env.REGION}"
       }
     }
    }
