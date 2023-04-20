@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.4.0-20220824</app.runtime>
+		<app.runtime>4.4.0-20220622</app.runtime>
 		<mule.maven.plugin.version>3.5.2</mule.maven.plugin.version>
 		<munit.version>2.3.11</munit.version>
 	</properties>
@@ -31,7 +31,6 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				     <classifier>mule-application</classifier>
 				     <cloudHubDeployment>
 				        <uri>https://anypoint.mulesoft.com</uri>
 				        <muleVersion>${mule.version}</muleVersion>
@@ -124,29 +123,11 @@
 			<layout>default</layout>
 		</repository>
 	    <repository>
-	        <id>mulesoft-snapshots</id>
-	        <name>MuleSoft Snapshot Repository</name>
-	        <url>http://repository.mulesoft.org/snapshots/</url>
-	        <layout>default</layout>
-	    </repository>
-		<repository>
 			<id>mulesoft-releases</id>
 			<name>MuleSoft Releases Repository</name>
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
 		</repository>
-		<repository>
-			<id>mulesoft-public</id>
-			<name>MuleSoft Public Repository</name>
-			<url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>Repository</id>
-			<name>Corporate Repository</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v1/organizations/6a860bc2-7c16-4fc4-8c42-9a362133e5f9/maven</url>
-			<layout>default</layout>
-	    </repository>
 	</repositories>
 
 	<pluginRepositories>
