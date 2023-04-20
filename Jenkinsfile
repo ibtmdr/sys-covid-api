@@ -9,10 +9,13 @@ pipeline {
   stages {
    stage('config') {
       steps {
+         echo "branch = ${env.BRANCH_NAME}"
          script {
             config = readJSON file: "env/${env.BRANCH_NAME}/config.json"
             env = config.get("env")
          }
+         echo " config = ${config}"
+         echo " env = ${env}"
       }
     }
    stage('Build') {
