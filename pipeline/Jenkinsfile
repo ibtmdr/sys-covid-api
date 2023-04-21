@@ -10,13 +10,15 @@ pipeline {
    stage('config') {
       steps {
          script {
-            config = readJSON file: "env/${env.BRANCH_NAME}/config.json"
+            config = readJSON file: "pipeline/env/${env.BRANCH_NAME}/config.json"
          }
       }
     }
-   stage('Build') {
+    
+    stage('Test and build') {
       steps {
-          sh "mvn -e -X clean package"
+          echo "testing ..."
+	      sh 'mvn --settings pipeline/settings.xml clean package'
       }
     }
 
