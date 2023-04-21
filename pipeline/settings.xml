@@ -3,14 +3,14 @@
   <servers>
     <server>
       <id>anypoint-exchange-v3</id>
-      <username>mdrIbtissam</username>
-      <password>Ibtissam@12345</password>
+      <username>238a942315a142a298334007f4ddce7c</username>
+      <password>0a9fBcaE85134b8ebE80A19137200348</password>
     </server>
 
     <server>
-      <id>MuleRepository</id>
-      <username>yourMuleNexusID</username>
-      <password>yourMuleNexusPassword</password>
+      <id>repository-mule</id>
+      <username>df57f299b67240f4a1414ab5f14b0cc3</username>
+      <password>0B6Ece4412fd40459d75f72a7cd527C8</password>
     </server>
   </servers>
 
@@ -48,8 +48,8 @@
 
       <repositories>
         <repository>
-          <id>MuleRepository</id>
-          <name>MuleRepository</name>
+          <id>repository-mule</id>
+          <name>repository-mule</name>
           <url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
           <layout>default</layout>
           <releases>
